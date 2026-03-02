@@ -109,17 +109,19 @@
 
         <div class="w-full flex-1 bg-[var(--bg-main)] relative flex flex-col h-[50vh] md:h-full">
             
-            <div class="panel-bg border-b theme-border p-2 flex items-center justify-between text-xs">
-                <div class="flex gap-1.5 px-2">
-                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                    <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
-                </div>
-                <div class="bg-[var(--bg-main)] border theme-border px-4 py-1 rounded-md opacity-80 flex-1 max-w-sm text-center mx-4 truncate font-mono">
-                    <i class="fa-solid fa-lock text-[10px] mr-1"></i> preview.ide.com
-                </div>
-                <div class="px-2 opacity-50 hover:opacity-100 cursor-pointer"><i class="fa-solid fa-expand"></i></div>
-            </div>
+           <div class="panel-bg border-b theme-border p-2 flex items-center justify-between text-xs">
+    <div class="flex gap-1.5 px-2">
+        <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+        <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+        <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+    </div>
+    <div class="bg-[var(--bg-main)] border theme-border px-4 py-1 rounded-md opacity-80 flex-1 max-w-sm text-center mx-4 truncate font-mono">
+        <i class="fa-solid fa-lock text-[10px] mr-1"></i> localhost:3000
+    </div>
+    <button onclick="openLocalhost()" class="theme-accent-bg px-3 py-1 rounded hover:opacity-80 transition flex items-center gap-1 font-bold shadow-sm">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> Run
+    </button>
+</div>
             
             <div class="w-full p-2 flex justify-center bg-[var(--bg-panel)] border-b theme-border">
                 <div class="w-[728px] max-w-full h-[90px] border border-dashed theme-border flex items-center justify-center opacity-40 text-xs">
@@ -136,10 +138,20 @@
         
     </main>
 
-    <script>
-        function changeTheme(themeName) {
-            document.documentElement.setAttribute('data-theme', themeName);
-        }
-    </script>
+   <script>
+    function changeTheme(themeName) {
+        document.documentElement.setAttribute('data-theme', themeName);
+    }
+
+    function openLocalhost() {
+        const iframe = document.getElementById('previewFrame');
+        const generatedCode = iframe.srcdoc;
+        const newWindow = window.open();
+        newWindow.document.open();
+        newWindow.document.write(generatedCode);
+        newWindow.document.close();
+        newWindow.document.title = "Localhost Preview - IDE AI";
+    }
+</script>
 </body>
 </html>
