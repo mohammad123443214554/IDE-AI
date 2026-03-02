@@ -1,115 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dusk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IDE AI | Professional AI Website Architect</title>
+    <title>IDE AI - Website Builder</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
-        .page-section { display: none; }
-        .page-section.active { display: block; }
-        .glass { background: rgba(31, 41, 55, 0.7); backdrop-filter: blur(10px); }
+        /* Aapki 4 Custom Themes (Aquatic, Desert, Dusk, Night sky) */
+        :root[data-theme="aquatic"] {
+            --bg-main: #1e293b; 
+            --bg-panel: #0f172a; 
+            --text-main: #e2e8f0;
+            --accent: #38bdf8; /* Light Blue */
+            --border: #334155;
+        }
+        :root[data-theme="desert"] {
+            --bg-main: #fdf8f5;
+            --bg-panel: #ffffff;
+            --text-main: #333333;
+            --accent: #d97706; /* Earth/Sand Color */
+            --border: #e5e7eb;
+        }
+        :root[data-theme="dusk"] {
+            --bg-main: #272a30;
+            --bg-panel: #32363e;
+            --text-main: #f3f4f6;
+            --accent: #818cf8; /* Slate/Indigo */
+            --border: #4b5563;
+        }
+        :root[data-theme="nightsky"] {
+            --bg-main: #000000;
+            --bg-panel: #111111;
+            --text-main: #ffffff;
+            --accent: #c084fc; /* Purple/Yellow Accent */
+            --border: #222222;
+        }
+
+        /* Basic Setup */
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .panel-bg { background-color: var(--bg-panel); }
+        .theme-border { border-color: var(--border); }
+        .theme-accent-text { color: var(--accent); }
+        .theme-accent-bg { background-color: var(--accent); color: #fff; }
     </style>
 </head>
-<body class="bg-[#0b0f1a] text-gray-100 font-sans leading-relaxed">
+<body class="h-screen flex flex-col font-sans overflow-hidden">
 
-    <nav class="sticky top-0 z-50 glass border-b border-gray-800 px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-3 cursor-pointer" onclick="showPage('home')">
-            <img src="logo.png" alt="Logo" class="h-10 w-10 rounded-lg shadow-blue-500/50 shadow-sm">
-            <span class="text-2xl font-black tracking-tighter text-white">IDE <span class="text-blue-500">AI</span></span>
+    <header class="panel-bg border-b theme-border flex justify-between items-center px-4 py-3 shrink-0">
+        <div class="flex items-center gap-3">
+            <img src="logo.png" alt="IDE AI Logo" class="h-8 w-8 rounded bg-gray-800">
+            <span class="text-xl font-bold tracking-wide">IDE <span class="theme-accent-text">AI</span></span>
         </div>
         
-        <div class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-400">
-            <button onclick="showPage('home')" class="hover:text-blue-400 transition">Home</button>
-            <button onclick="showPage('about')" class="hover:text-blue-400 transition">About Us</button>
-            <button onclick="showPage('privacy')" class="hover:text-blue-400 transition">Privacy Policy</button>
-            <button onclick="showPage('terms')" class="hover:text-blue-400 transition">Terms of Service</button>
-            <button onclick="showPage('contact')" class="hover:text-blue-400 transition">Contact</button>
+        <nav class="hidden md:flex gap-6 text-sm font-medium">
+            <a href="index.html" class="theme-accent-text font-bold">Workspace</a>
+            <a href="about.html" class="hover:opacity-70 transition">About Us</a>
+            <a href="privacy.html" class="hover:opacity-70 transition">Privacy</a>
+            <a href="terms.html" class="hover:opacity-70 transition">Terms</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+            <select id="themeSelect" onchange="changeTheme(this.value)" class="panel-bg theme-border border text-sm rounded px-2 py-1 outline-none cursor-pointer">
+                <option value="dusk">🌙 Dusk</option>
+                <option value="aquatic">🌊 Aquatic</option>
+                <option value="desert">🏜️ Desert</option>
+                <option value="nightsky">🌌 Night Sky</option>
+            </select>
+            <button class="theme-accent-bg px-4 py-1.5 rounded font-semibold text-sm shadow hover:opacity-90 transition">
+                Publish <i class="fa-solid fa-cloud-arrow-up ml-1"></i>
+            </button>
         </div>
+    </header>
 
-        <button class="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-blue-600/20 transition">
-            Get Started
-        </button>
-    </nav>
-
-    <div class="max-w-7xl mx-auto px-4 py-8">
+    <main class="flex-1 flex flex-col md:flex-row overflow-hidden">
         
-        <section id="home" class="page-section active animate-fade-in">
-            <div class="text-center mb-10">
-                <h1 class="text-5xl font-extrabold text-white mb-4">Build the Future with AI</h1>
-                <p class="text-gray-400 max-w-2xl mx-auto">Transform your prompts into professional, high-performance websites instantly using the power of IDE AI.</p>
+        <div class="w-full md:w-[350px] lg:w-[400px] panel-bg border-r theme-border flex flex-col h-[50vh] md:h-full">
+            <div class="p-3 border-b theme-border text-xs font-bold uppercase tracking-wider opacity-70 flex items-center">
+                <i class="fa-solid fa-wand-magic-sparkles mr-2 theme-accent-text"></i> AI Architect
+            </div>
+            
+            <div id="chatHistory" class="flex-1 overflow-y-auto p-4 flex flex-col gap-4 text-sm">
+                <div class="flex gap-3">
+                    <div class="w-7 h-7 rounded-full theme-accent-bg flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-robot text-xs"></i>
+                    </div>
+                    <div class="bg-[var(--bg-main)] border theme-border p-3 rounded-xl rounded-tl-none max-w-[90%] shadow-sm">
+                        Hello! I am IDE AI. Describe the website you want to build (e.g., "Create a modern portfolio website").
+                    </div>
+                </div>
             </div>
 
-            <div class="bg-gray-800/50 p-3 rounded-2xl border border-gray-700 shadow-2xl flex gap-3 mb-8">
-                <input type="text" id="promptInput" placeholder="Describe your dream website in detail..." 
-                       class="flex-grow bg-transparent p-4 outline-none text-lg">
-                <button class="bg-blue-600 hover:bg-blue-700 px-10 py-4 rounded-xl font-bold flex items-center gap-2">
-                    Build Now <i class="fa-solid fa-wand-magic-sparkles"></i>
-                </button>
+            <div class="p-4 border-t theme-border bg-[var(--bg-panel)]">
+                <div class="relative">
+                    <textarea id="promptInput" placeholder="Type your prompt here..." class="w-full bg-[var(--bg-main)] border theme-border rounded-lg pl-3 pr-12 py-3 text-sm outline-none resize-none shadow-inner" rows="3"></textarea>
+                    <button class="absolute bottom-3 right-3 rounded p-2 hover:bg-[var(--bg-panel)] transition theme-accent-text">
+                        <i class="fa-solid fa-paper-plane text-lg"></i>
+                    </button>
+                </div>
+                <div class="text-[10px] opacity-50 text-center mt-2 font-mono">Powered by Gemini API</div>
             </div>
-
-            <div class="w-full h-24 bg-gray-800/30 border border-dashed border-gray-700 rounded-xl mb-8 flex items-center justify-center text-gray-600 font-mono text-xs">
-                ADVERTISING SPACE (AUTO-ADS READY)
-            </div>
-
-            <div class="rounded-2xl border-4 border-gray-800 bg-white h-[600px] shadow-2xl overflow-hidden">
-                <iframe class="w-full h-full" srcdoc="<body style='display:flex;justify-content:center;align-items:center;height:100vh;font-family:sans-serif;background:#f3f4f6;color:#9ca3af'><h2>Your AI-generated website will appear here</h2></body>"></iframe>
-            </div>
-        </section>
-
-        <section id="about" class="page-section py-20">
-            <h2 class="text-4xl font-bold mb-6 text-blue-400">About IDE AI</h2>
-            <p class="text-xl text-gray-300">Founded by Mohammad Khan, IDE AI is a revolutionary platform designed to democratize web development. We use advanced neural networks to convert human ideas into clean, functional code.</p>
-        </section>
-
-        <section id="privacy" class="page-section py-20">
-            <h2 class="text-4xl font-bold mb-6">Privacy Policy</h2>
-            <div class="text-gray-400 space-y-4">
-                <p>At IDE AI, we prioritize your data security. This policy outlines how we handle your prompts and generated content.</p>
-                <p>1. Data Collection: We do not store personal identifiable information without consent.</p>
-                <p>2. Cookies: We use cookies to enhance your experience and serve relevant advertisements through Google AdSense.</p>
-            </div>
-        </section>
-
-        <section id="terms" class="page-section py-20">
-            <h2 class="text-4xl font-bold mb-6">Terms of Service</h2>
-            <p class="text-gray-400">By using IDE AI, you agree to our fair usage policy. Automated scraping of our AI generation service is strictly prohibited.</p>
-        </section>
-
-        <section id="contact" class="page-section py-20 text-center">
-            <h2 class="text-4xl font-bold mb-6">Get in Touch</h2>
-            <p class="mb-8 text-gray-400">Have questions? Our team is here to help.</p>
-            <div class="bg-gray-800 p-8 rounded-2xl max-w-lg mx-auto border border-gray-700">
-                <input type="email" placeholder="Your Email" class="w-full p-4 mb-4 bg-gray-900 rounded-lg border border-gray-700">
-                <textarea placeholder="Your Message" class="w-full p-4 mb-4 bg-gray-900 rounded-lg border border-gray-700 h-32"></textarea>
-                <button class="w-full bg-blue-600 py-4 rounded-lg font-bold">Send Message</button>
-            </div>
-        </section>
-
-    </div>
-
-    <footer class="bg-gray-900 border-t border-gray-800 py-12 px-6 mt-20">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-gray-500 text-sm">
-            <div>
-                <span class="text-white font-bold">IDE AI</span> - Powered by Mohammad Khan AI Lab.
-            </div>
-            <div class="flex gap-6">
-                <a href="#" class="hover:text-white">Twitter</a>
-                <a href="#" class="hover:text-white">GitHub</a>
-                <a href="#" class="hover:text-white">LinkedIn</a>
-            </div>
-            <div>&copy; 2026 IDE AI. All Rights Reserved.</div>
         </div>
-    </footer>
+
+        <div class="w-full flex-1 bg-[var(--bg-main)] relative flex flex-col h-[50vh] md:h-full">
+            
+            <div class="panel-bg border-b theme-border p-2 flex items-center justify-between text-xs">
+                <div class="flex gap-1.5 px-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                </div>
+                <div class="bg-[var(--bg-main)] border theme-border px-4 py-1 rounded-md opacity-80 flex-1 max-w-sm text-center mx-4 truncate font-mono">
+                    <i class="fa-solid fa-lock text-[10px] mr-1"></i> preview.ide.com
+                </div>
+                <div class="px-2 opacity-50 hover:opacity-100 cursor-pointer"><i class="fa-solid fa-expand"></i></div>
+            </div>
+            
+            <div class="w-full p-2 flex justify-center bg-[var(--bg-panel)] border-b theme-border">
+                <div class="w-[728px] max-w-full h-[90px] border border-dashed theme-border flex items-center justify-center opacity-40 text-xs">
+                    [ AdSense Space (728x90) ]
+                </div>
+            </div>
+
+            <div class="flex-1 p-2 md:p-6 overflow-hidden flex items-center justify-center">
+                <div class="w-full h-full bg-white rounded-xl shadow-2xl border theme-border overflow-hidden relative">
+                    <iframe id="previewFrame" class="w-full h-full bg-white" srcdoc="<body style='display:flex;justify-content:center;align-items:center;height:100vh;font-family:sans-serif;color:#999;margin:0;background:#f3f4f6;'><h2>Your generated website will render here...</h2></body>"></iframe>
+                </div>
+            </div>
+        </div>
+        
+    </main>
 
     <script>
-        function showPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0,0);
+        function changeTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
         }
     </script>
 </body>
