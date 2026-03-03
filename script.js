@@ -5,7 +5,7 @@
  */
 
 // 1. CONFIGURATION
-const API_KEY = "YOUR_GEMINI_API_KEY_HERE"; // <--- Bhai yahan apni asli key dalo
+const API_KEY = "AIzaSyAK6dZO97SIRA7HlVDBZF0U8CD4qfro7JU"; // <--- Bhai yahan apni asli key dalo
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
 // 2. MAIN GENERATION FUNCTION
