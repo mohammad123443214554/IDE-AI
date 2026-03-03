@@ -1,6 +1,6 @@
 // 1. CONFIGURATION
 // Bhai, yahan apni key 'AIza...' wali direct paste karni hai
-const API_KEY = "APNI_ASLI_GEMINI_KEY_YAHAN_DALO"; 
+const API_KEY = "AIzaSyC0NCYPihcRJFTuMAnPSHbLqkC7Dz53Bzs"; 
 
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
