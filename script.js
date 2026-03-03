@@ -1,6 +1,6 @@
 // 1. CONFIGURATION
 // Bhai, yahan apni asli key dalo
-const API_KEY = "YAHAN_APNI_API_KEY_PASTE_KARO"; 
+const API_KEY = "AIzaSyC0NCYPihcRJFTuMAnPSHbLqkC7Dz53Bzs"; 
 
 // Is URL ko ekdum dhyan se copy karna, isme v1beta aur models/ ka sahi hona zaroori hai
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
